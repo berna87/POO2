@@ -1,7 +1,6 @@
 package ejercicios;
-
+enum Estado {LENTO, MEDIO, RAPIDO };
 public class Ventilador {
-	private enum Estado {LENTO, MEDIO, RAPIDO };
 	private Estado velocidad;
 	private boolean encendido;
 	private double radioVentilador; //en centimetros

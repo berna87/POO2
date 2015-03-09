@@ -109,7 +109,7 @@ public class CuentaBancaria {
 	
 	@Override
 	public String toString() {
-		return "Numero de Cuenta : "+numeroDeCuenta+" Saldo : "+saldo;
+		return "Numero de Cuenta : "+numeroDeCuenta+" Saldo : "+saldo +"\nFecha creacion : "+fechaCreacion;
 	}
 
 	private class Cuenta{
@@ -122,15 +122,18 @@ public class CuentaBancaria {
 		}
 		private int generarPrimerDigitoControl(){
 			int digito1 = 0;	
-			digito1 += Integer.parseInt(BANCO.substring(0,1))*4;
-			digito1 += Integer.parseInt(BANCO.substring(1,2))*8;
-			digito1 += Integer.parseInt(BANCO.substring(2,3))*5;
-			digito1 += Integer.parseInt(BANCO.substring(3))*10;
-			digito1 += Integer.parseInt(ENTIDAD.substring(0,1))*9;
-			digito1 += Integer.parseInt(ENTIDAD.substring(1,2))*7;
-			digito1 += Integer.parseInt(ENTIDAD.substring(2,3))*3;
-			digito1 += Integer.parseInt(ENTIDAD.substring(3))*6;
-			return digito1%=10;	
+			digito1 += Integer.parseInt(ENTIDAD.substring(0,1))*4;
+			digito1 += Integer.parseInt(ENTIDAD.substring(1,2))*8;
+			digito1 += Integer.parseInt(ENTIDAD.substring(2,3))*5;
+			digito1 += Integer.parseInt(ENTIDAD.substring(3))*10;
+			digito1 += Integer.parseInt(BANCO.substring(0,1))*9;
+			digito1 += Integer.parseInt(BANCO.substring(1,2))*7;
+			digito1 += Integer.parseInt(BANCO.substring(2,3))*3;
+			digito1 += Integer.parseInt(BANCO.substring(3))*6;
+			int resta = 11 - (digito1 % 11);
+			if(resta == 10) return 1;
+			if(resta == 11) return 0;
+			return resta;	
 		}
 		private int generarSegundoDigitoControl(){
 			int digito2 = 0;
@@ -144,7 +147,10 @@ public class CuentaBancaria {
 			digito2 += Integer.parseInt(numeroPersonal.substring(7,8))*7;
 			digito2 += Integer.parseInt(numeroPersonal.substring(8,9))*3;
 			digito2 += Integer.parseInt(numeroPersonal.substring(9))*6;
-			return digito2%=10;
+			int resta = 11 - (digito2 % 11);
+			if(resta == 10) return 1;
+			if(resta == 11) return 0;
+			return resta;	
 		}
 		private String generarNumeroPersonal(){
 			String nPersonal = "";
