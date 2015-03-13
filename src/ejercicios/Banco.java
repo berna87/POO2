@@ -20,56 +20,50 @@ public class Banco {
 	 */
 	
 	public void addCuenta(CuentaBancaria c){
-		lista.add(c);
-		numeroDeCuentas++;
+		if (!lista.contains(c)){
+			lista.add(c);
+			numeroDeCuentas++;}
 	}
 	/**
 	 * 
 	 * @param c Objeto de tipo CuentaBancaria para quitarlo de la lista del objeto Banco
 	 */
 	public void removeCuenta(CuentaBancaria c){
-		lista.remove(c);
+		if (lista.contains(c)){
+			lista.remove(c);
+			numeroDeCuentas--;}
 	}
 	/**
 	 * 
 	 * @return Devuelve la cuenta con mayor saldo
 	 */
-	public CuentaBancaria cuenaConMayorSaldo(){
-		if(lista.size()>0){
-			double mayorSaldo = lista.get(0).getSaldo();
-			CuentaBancaria cuentaMayorSaldo=lista.get(0);
-			for (CuentaBancaria cuentaBancaria : lista) {
-				if(cuentaBancaria.getSaldo()>mayorSaldo){
-					cuentaMayorSaldo=cuentaBancaria;
-					mayorSaldo=cuentaBancaria.getSaldo();
-				}
-			}
-			return cuentaMayorSaldo;
-		} else {
-			System.out.println("No hay cuentas");
-			return null;
+	public List<CuentaBancaria> cuentaConMayorSaldo(){
+		List<CuentaBancaria> list = new ArrayList<CuentaBancaria>();
+		double mayorSaldo=0;
+		for (CuentaBancaria cuentaBancaria : lista) {
+			if(cuentaBancaria.getSaldo() > mayorSaldo) mayorSaldo = cuentaBancaria.getSaldo();
 		}
+		for (CuentaBancaria cuentaBancaria : lista) {
+			if(cuentaBancaria.getSaldo()==mayorSaldo) list.add(cuentaBancaria);
+		}
+		return list;
 	}
 	/**
 	 * 
 	 * @return devuelve la cuenta con menor saldo
 	 */
-	public CuentaBancaria cuenaConMenorSaldo(){
-		if(lista.size()>0){
-			double menorSaldo = lista.get(0).getSaldo();
-			CuentaBancaria cuentaMenorSaldo=lista.get(0);
-			for (CuentaBancaria cuentaBancaria : lista) {
-				if(cuentaBancaria.getSaldo()<menorSaldo){
-					cuentaMenorSaldo=cuentaBancaria;
-					menorSaldo=cuentaBancaria.getSaldo();
-				}
-			}
-			return cuentaMenorSaldo;
-		} else {
-			System.out.println("No hay cuentas");
-			return null;
+	public List<CuentaBancaria> cuentaConMenorSaldo(){
+		List<CuentaBancaria> list = new ArrayList<CuentaBancaria>();
+		double menorSaldo=Double.MAX_VALUE;
+		for (CuentaBancaria cuentaBancaria : lista) {
+			if(cuentaBancaria.getSaldo() < menorSaldo) menorSaldo = cuentaBancaria.getSaldo();
 		}
+		for (CuentaBancaria cuentaBancaria : lista) {
+			if(cuentaBancaria.getSaldo()==menorSaldo) list.add(cuentaBancaria);
+		}
+		return list;
 	}
+	
 	private double saldoMedio(){
 		if(lista.size()>0){
 			double suma = 0;

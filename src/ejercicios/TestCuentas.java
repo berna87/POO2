@@ -18,6 +18,8 @@ public class TestCuentas {
 		System.out.println("Estado inicial del objeto banco :\n"+b);
 		b.addCuenta(c1); b.addCuenta(c2); b.addCuenta(c3);
 		b.addCuenta(c4); b.addCuenta(c5);
+		System.out.println("Cuenta con mayor saldo :\n"+b.cuentaConMayorSaldo());
+		System.out.println("Cuenta con menor saldo :\n"+b.cuentaConMenorSaldo());
 		System.out.println("Despues de añadir las cuentas :\n"+b);
 	}
 
